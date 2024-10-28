@@ -1,0 +1,90 @@
+Language Specification
+
+1. Language Definition
+
+ 1.1 Alphabet:
+	Uppercase and Lowercase Letters: A-Z, a-z
+	Underline Character: _
+	Decimal Digits: 0-9
+
+ 1.2 Lexic Elements:
+
+	Special Symbols:
+		Operators: +, -, *, /, :=, <, <=, =, >=
+		Separators: [, ], {, }, :, ;, whitespace (space or newline)
+
+	Reserved Words:
+		array, char, const, do, else, if, int, of, program, read, then, var, while, write
+
+	Identifiers:
+	   A sequence of letters and digits, beginning with a letter.
+	   Syntax:
+		    identifier ::= letter | letter{letter | digit}
+		    letter ::= "A" | "B" | ... | "Z" | "a" | "b" | ... | "z"
+		    digit ::= "0" | "1" | ... | "9"
+
+	Constants:
+	   Integer Constants: 
+      Positive and negative integers	
+		    noconst ::= +no | -no | no
+		    no ::= digit{no}
+
+	   Character Constants: 
+      A single letter or digit enclosed in single quotes
+		    character ::= 'letter' | 'digit'
+
+	   String Constants: A sequence of characters (letters or digits) enclosed in double quotes
+		    constchar ::= "string"
+		    string ::= char{string}
+		    char ::= letter | digit
+2. Syntax
+
+ 2.1 Predefined Tokens: Predefined tokens (reserved words and symbols) are defined in double quotes, e.g., "VAR", "IF", "THEN".
+
+ 2.2 Syntactical Rules:
+  
+  Below are the syntactical rules using Backus-Naur Form (BNF):
+
+	Program Structure:
+		program ::= "VAR" decllist ";" cmpdstmt "."
+
+	Declarations:
+		decllist ::= declaration | declaration ";" decllist
+		declaration ::= IDENTIFIER ":" type
+		type ::= type1 | arraydecl
+		type1 ::= "BOOLEAN" | "CHAR" | "INTEGER" | "REAL"
+		arraydecl ::= "ARRAY" "[" nr "]" "OF" type1
+
+	Compound Statement:
+		cmpdstmt ::= "BEGIN" stmtlist "END"
+		stmtlist ::= stmt | stmt ";" stmtlist
+
+	Statements:
+		stmt ::= simplstmt | structstmt
+
+	Simple Statements:
+		simplstmt ::= assignstmt | iostmt
+		assignstmt ::= IDENTIFIER ":=" expression
+
+	Expressions:
+		expression ::= expression "+" term | term
+		term ::= term "*" factor | factor
+		factor ::= "(" expression ")" | IDENTIFIER
+
+	Input/Output Statements:
+		iostmt ::= "READ" "(" IDENTIFIER ")" | "WRITE" "(" IDENTIFIER ")"
+
+	Structured Statements:
+		structstmt ::= cmpdstmt | ifstmt | whilestmt
+
+	Conditional Statements:
+		ifstmt ::= "IF" condition "THEN" stmt ["ELSE" stmt]
+
+	Loop Statements:
+		whilestmt ::= "WHILE" condition "DO" stmt
+
+	Conditions:
+		condition ::= expression RELATION expression
+		RELATION ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
+
+		
