@@ -1,0 +1,36 @@
+VAR
+    k : INTEGER;
+    n : INTEGER;
+    count : INTEGER;
+    isPrime : BOOLEAN;
+
+BEGIN
+    READ(k);
+    n := 2;
+    count := 0;
+
+    WHILE count < k DO
+    BEGIN
+        isPrime := TRUE;
+        VAR i : INTEGER;
+        i := 2;
+
+        WHILE i * i <= n DO
+        BEGIN
+            IF n MOD i = 0 THEN
+            BEGIN
+                isPrime := FALSE;
+                BREAK;
+            END;
+            i := i + 1;
+        END;
+
+        IF isPrime THEN
+        BEGIN
+            WRITE(n);
+            count := count + 1;
+        END;
+
+        n := n + 1;
+    END;
+END.
