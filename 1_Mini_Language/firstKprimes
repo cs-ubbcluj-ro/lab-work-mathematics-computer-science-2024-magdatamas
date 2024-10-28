@@ -3,6 +3,7 @@ VAR
     n : INTEGER;
     count : INTEGER;
     isPrime : BOOLEAN;
+    i : INTEGER;
 
 BEGIN
     READ(k);
@@ -12,16 +13,13 @@ BEGIN
     WHILE count < k DO
     BEGIN
         isPrime := TRUE;
-        VAR i : INTEGER;
         i := 2;
 
         WHILE i * i <= n DO
         BEGIN
-            IF n MOD i = 0 THEN
-            BEGIN
+            IF (n / i) * i = n THEN
                 isPrime := FALSE;
-                BREAK;
-            END;
+
             i := i + 1;
         END;
 
